@@ -1,0 +1,34 @@
+
+
+
+def mvt_initial_pion(couleur):
+    if couleur == "blanc":
+        
+
+
+
+
+
+def mvt_pion(couleur):
+
+
+def pion_mange():
+
+
+def mvt_cheval():
+
+
+
+
+
+def mvt_tour():
+
+
+
+def mvt_fou():
+
+
+def mvt_roi():
+
+def mvt_reine():
+
