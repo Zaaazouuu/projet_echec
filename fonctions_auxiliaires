@@ -6,6 +6,10 @@ def position_finale (vecteur_deplacement, position_initiale):
 
 def dans_le_damier(position_finale):
     if position_finale[0]<16 and position_finale[0]>=0 and position_finale[1]<16 and position_finale[1]>=0 : 
+
+def mvt_initial_pion(couleur):
+    if couleur == "blanc":
+
         return True
     return False
 
@@ -28,23 +32,63 @@ def mvt_pion(vecteur_deplacement,joueur):
     return False
 
 
+
+
+def mvt_pion(couleur, pos):
+    return True
+
+
+
 def pion_mange():
     return True
 
-def mvt_cheval():
-    return True
+def mvt_cheval(vecteur_deplacement):
+    if vecteur_deplacement in [(2, 1), (2, -1), (-2, 1), (-2, -1),
+                             (1, 2), (1, -2), (-1, 2), (-1, -2)]:
+        return True
+    return False
 
 
 
 
-def mvt_tour():
-    return True
+
+
+def mvt_tour(vecteur_deplacement):
+    if vecteur_deplacement in [(0, n) for n in range(-7,8) if n!=0] + [(n,0) for n in range(-7,8) if n!=0]:
+        return True
+    return False
 
 
 def mvt_fou():
+    if vecteur_deplacement in [(n, n) for n in range(-7,8) if n!=0] + [(n, -n) for n in range(-7,8) if n!=0]:
+        return True
+    return False
+
+    
+    
+
+def mvt_roi(vecteur_deplacement):
+    if vecteur_deplacement in [(-1,-1), (-1,0), (-1,1),
+                             (0,-1), (0,1),
+                             (1,-1),  (1,0), (1,1)]:
+        return True
+    return False
+
+
+def mvt_reine(vecteur_deplacement):
+    if mvt_tour(vecteur_deplacement) or mvt_fou(vecteur_deplacement):
+        return True
+    return False
+
+
+def non_tir_ami(pos_arrivee, pos_depart, position):
+    joueur = position[pos_depart][-1]
+    if position[pos_arrivee] is not None:
+        if position[pos_arrivee][-1] == joueur:
+            return False
     return True
 
-def mvt_roi():
-    return True
-def mvt_reine():
-    return True
+
+
+        
+   
