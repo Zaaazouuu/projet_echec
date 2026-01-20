@@ -1,0 +1,5 @@
+
+
+positions_initiale = {}
+    
+

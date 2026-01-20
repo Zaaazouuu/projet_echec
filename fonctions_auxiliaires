@@ -3,32 +3,32 @@
 
 def mvt_initial_pion(couleur):
     if couleur == "blanc":
-        
-
+        return True
 
 
 
 
 def mvt_pion(couleur):
+    return True
 
 
 def pion_mange():
-
+    return True
 
 def mvt_cheval():
-
+    return True
 
 
 
 
 def mvt_tour():
-
+    return True
 
 
 def mvt_fou():
-
+    return True
 
 def mvt_roi():
-
+    return True
 def mvt_reine():
-
+    return True
