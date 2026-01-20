@@ -4,8 +4,7 @@ from images_pièces import image_piece
 side_length = 16
 case_per_line = 8
 
-position_initiale=initialisation_position()
-print(position_initiale)
+position=initialisation_position()
 damier =[]
 for i in range (0, case_per_line):
     for j in range (0,case_per_line): 
@@ -23,9 +22,10 @@ class App:
     def __init__(self,start):
         self.start=start
         pyxel.init(side_length*case_per_line,side_length*case_per_line, title="Jeu d'échec")
+        pyxel.mouse(True)
         pyxel.run(self.update, self.draw)
-        
 
+        
     def update(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
@@ -44,7 +44,7 @@ class App:
     def draw_piece(self):
         for x in range (0,case_per_line):
             for y in range (0,case_per_line):
-                piece=position_initiale[(x,y)]
+                piece=position[(x,y)]
                 if piece !=None :
                     coloration=color(piece)
                     name=piece[0:len(piece)-1]

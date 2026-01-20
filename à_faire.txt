@@ -1,0 +1,6 @@
+Choses à faire : 
+OK affichage du curseur 
+- rafraichissement de la page
+- déplacement des pièces avec le curseur (entrée sous forme de vecteur déplacement)
+- coder règles de déplacement des pièces
+- gestion des erreurs
