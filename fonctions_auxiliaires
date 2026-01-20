@@ -39,7 +39,7 @@ def mvt_tour(vecteur_deplacement):
     return False
 
 
-def mvt_fou():
+def mvt_fou(vecteur_deplacement):
     if vecteur_deplacement in [(n, n) for n in range(-7,8) if n!=0] + [(n, -n) for n in range(-7,8) if n!=0]:
         return True
     return False
