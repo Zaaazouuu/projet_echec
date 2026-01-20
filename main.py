@@ -1,10 +1,11 @@
 import pyxel
 from position_data import initialisation_position
-from images_pieces import image_piece
+from images_pièces import image_piece
 side_length = 16
 case_per_line = 8
 
 position_initiale=initialisation_position()
+print(position_initiale)
 damier =[]
 for i in range (0, case_per_line):
     for j in range (0,case_per_line): 
@@ -32,15 +33,21 @@ class App:
     def draw(self):
         pyxel.cls(0)
         self.draw_maze()
+        self.draw_piece()
     
     def draw_maze(self):
         for x,y in self.start :
             for i in range (0,side_length) :
                 for j in range (0,side_length):
                     pyxel.pset(side_length*x+i,y*side_length+j,7)
-            piece=position_initiale(x,y)
-            if piece !=None :
-                coloration=color(piece)
-                for i,j in image_piece(piece[0:len(piece)-1]):
-                    pyxel.pset(side_length*x+i,y*side_length+j,coloration)       
-App(damier,image_piece)
+            
+    def draw_piece(self):
+        for x in range (0,case_per_line):
+            for y in range (0,case_per_line):
+                piece=position_initiale[(x,y)]
+                if piece !=None :
+                    coloration=color(piece)
+                    name=piece[0:len(piece)-1]
+                    for i,j in image_piece[name]:
+                        pyxel.pset(side_length*x+i,y*side_length+j,coloration)       
+App(damier)
