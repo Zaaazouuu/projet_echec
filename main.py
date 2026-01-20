@@ -51,3 +51,4 @@ class App:
                     for i,j in image_piece[name]:
                         pyxel.pset(side_length*x+i,y*side_length+j,coloration)       
 App(damier)
+

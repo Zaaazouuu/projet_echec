@@ -6,12 +6,7 @@ def position_finale (vecteur_deplacement, position_initiale):
 
 def dans_le_damier(position_finale):
     if position_finale[0]<16 and position_finale[0]>=0 and position_finale[1]<16 and position_finale[1]>=0 : 
-
-def mvt_initial_pion(couleur):
-    if couleur == "blanc":
-
         return True
-    return False
 
 def mvt_initial_pion(vecteur_deplacement,joueur):
     if joueur == "1":
@@ -31,26 +26,11 @@ def mvt_pion(vecteur_deplacement,joueur):
             return True
     return False
 
-
-
-
-def mvt_pion(couleur, pos):
-    return True
-
-
-
-def pion_mange():
-    return True
-
 def mvt_cheval(vecteur_deplacement):
     if vecteur_deplacement in [(2, 1), (2, -1), (-2, 1), (-2, -1),
                              (1, 2), (1, -2), (-1, 2), (-1, -2)]:
         return True
     return False
-
-
-
-
 
 
 def mvt_tour(vecteur_deplacement):
