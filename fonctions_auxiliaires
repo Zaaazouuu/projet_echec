@@ -4,6 +4,13 @@ def position_finale (vecteur_deplacement, position_initiale):
     position_finale=position_initiale+vecteur_deplacement
     return position_finale
 
+def non_tir_ami(pos_arrivee, pos_depart, position):
+    joueur = position[pos_depart][-1]
+    if position[pos_arrivee] is not None:
+        if position[pos_arrivee][-1] == joueur:
+            return False
+    return True
+
 def dans_le_damier(position_finale):
     if position_finale[0]<16 and position_finale[0]>=0 and position_finale[1]<16 and position_finale[1]>=0 : 
         return True
@@ -42,10 +49,7 @@ def mvt_tour(vecteur_deplacement):
 def mvt_fou(vecteur_deplacement):
     if vecteur_deplacement in [(n, n) for n in range(-7,8) if n!=0] + [(n, -n) for n in range(-7,8) if n!=0]:
         return True
-    return False
-
-    
-    
+    return False    
 
 def mvt_roi(vecteur_deplacement):
     if vecteur_deplacement in [(-1,-1), (-1,0), (-1,1),
@@ -61,12 +65,6 @@ def mvt_reine(vecteur_deplacement):
     return False
 
 
-def non_tir_ami(pos_arrivee, pos_depart, position):
-    joueur = position[pos_depart][-1]
-    if position[pos_arrivee] is not None:
-        if position[pos_arrivee][-1] == joueur:
-            return False
-    return True
 
 
 
