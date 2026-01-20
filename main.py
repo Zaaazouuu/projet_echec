@@ -16,7 +16,7 @@ def color(piece):
         return 3
     if piece[-1]=="2":
         return 9
-
+print(position)
 
 class App:
     def __init__(self,start):
