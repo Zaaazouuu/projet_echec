@@ -4,3 +4,6 @@ OK affichage du curseur
 - déplacement des pièces avec le curseur (entrée sous forme de vecteur déplacement)
 - coder règles de déplacement des pièces
 - gestion des erreurs
+- interdire de sortir du damier
+- premièr déplacement des pions : 2 sauts autorisés
+- ne pas manger ses propres pions (identification par numéro)

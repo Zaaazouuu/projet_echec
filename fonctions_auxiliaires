@@ -1,15 +1,31 @@
 
+#vecteur_deplacement : tuple de déplacement
+def position_finale (vecteur_deplacement, position_initiale): 
+    position_finale=position_initiale+vecteur_deplacement
+    return position_finale
 
-
-def mvt_initial_pion(couleur):
-    if couleur == "blanc":
+def dans_le_damier(position_finale):
+    if position_finale[0]<16 and position_finale[0]>=0 and position_finale[1]<16 and position_finale[1]>=0 : 
         return True
+    return False
 
+def mvt_initial_pion(vecteur_deplacement,joueur):
+    if joueur == "1":
+        if vecteur_deplacement in [(0,1),(0,2)] : 
+            return True
+    if joueur == "2":
+        if vecteur_deplacement in [(0,-1),(0,-2)] : 
+            return True
+    return False
 
-
-
-def mvt_pion(couleur):
-    return True
+def mvt_pion(vecteur_deplacement,joueur):
+    if joueur == "1":
+        if vecteur_deplacement in [(0,1)] : 
+            return True
+    if joueur == "2":
+        if vecteur_deplacement in [(0,-1)] : 
+            return True
+    return False
 
 
 def pion_mange():
