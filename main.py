@@ -1,7 +1,7 @@
 import pyxel
 from position_data import initialisation_position
 from images_pièces import image_piece
-from gestion_souris import gestion_commande
+from fonctions_auxiliaires import gestion_commande
 side_length = 16
 case_per_line = 8
 
@@ -22,8 +22,9 @@ doubleclic=[]
 
 
 class App:
-    def __init__(self,start):
+    def __init__(self,start,doubleclic):
         self.start=start
+        self.doubleclic=doubleclic
         pyxel.init(side_length*case_per_line,side_length*case_per_line, title="Jeu d'échec")
         pyxel.mouse(True)
         pyxel.run(self.update, self.draw)
@@ -58,13 +59,16 @@ class App:
         if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) : 
             x = pyxel.mouse_x//16
             y = pyxel.mouse_y//16
-            doubleclic.append((x,y))
+            self.doubleclic.append((x,y))
+            print(self.doubleclic)
+            self.maj()
     
     def maj(self):
-        if len(doubleclic)==2 : 
-            gestion_commande(doubleclic[0],doubleclic[1],position)
-            doubleclic=[]
-        if len(doubleclic)>2 : 
-            doubleclic=[]
+        if len(self.doubleclic)==2 : 
+            print(doubleclic)
+            gestion_commande(position,self.doubleclic[0],self.doubleclic[1])
+            self.doubleclic=[]
+        if len(self.doubleclic)>2 : 
+            self.doubleclic=[]
     
-App(damier)
+App(damier, doubleclic)
