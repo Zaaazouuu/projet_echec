@@ -1,6 +1,7 @@
 import pyxel
 from position_data import initialisation_position
 from images_pièces import image_piece
+from gestion_souris import gestion_commande
 side_length = 16
 case_per_line = 8
 
@@ -59,8 +60,11 @@ class App:
             doubleclic.append((x,y))
     
     def maj(self):
-        return True
-
+        if len(doubleclic)==2 : 
+            gestion_commande(doubleclic[0],doubleclic[1],position)
+            doubleclic=[]
+        if len(doubleclic)>2 : 
+            doubleclic=[]
     
 App(damier)
 
