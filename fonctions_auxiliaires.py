@@ -107,7 +107,7 @@ def gestion_commande(position,clic1,clic2):
     pos_depart=clic1
     pos_arrivee=clic2
     piece=position[pos_depart]
-    if pos_depart==None : 
+    if piece==None : 
         return position
     joueur=piece[-1]
     vecteur_deplacement=(pos_arrivee[0]-pos_depart[0],pos_arrivee[1]-pos_depart[1])
@@ -132,6 +132,11 @@ def gestion_commande(position,clic1,clic2):
             if position[pos_arrivee]!=None and cle==False and vecteur_deplacement in [(1,1),(-1,-1),(1,-1),(-1,1)]:
                 position[pos_depart]=None
                 position[pos_arrivee]=piece
+            #si le pion arrive au camp opposé il devient une dame
+            if pos_arrivee in [(i,0) for i in range (0,8)] and joueur=="2" : 
+                position[pos_arrivee]="dame2"
+            if pos_arrivee in [(i,7) for i in range (0,8)] and joueur=="1" : 
+                position[pos_arrivee]="dame1"
                 
 
     if nom_piece=="cavalier":

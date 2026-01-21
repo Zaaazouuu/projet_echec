@@ -20,10 +20,10 @@ def color(piece):
 
 doubleclic=[]
 
-
 class App:
     def __init__(self,start,doubleclic):
         self.start=start
+        self.couleur_blanche=7
         self.doubleclic=doubleclic
         pyxel.init(side_length*case_per_line,side_length*case_per_line, title="Jeu d'échec")
         pyxel.mouse(True)
@@ -44,7 +44,7 @@ class App:
         for x,y in self.start :
             for i in range (0,side_length) :
                 for j in range (0,side_length):
-                    pyxel.pset(side_length*x+i,y*side_length+j,7)
+                    pyxel.pset(side_length*x+i,y*side_length+j,self.couleur_blanche)
             
     def draw_piece(self):
         for x in range (0,case_per_line):
@@ -70,5 +70,12 @@ class App:
             self.doubleclic=[]
         if len(self.doubleclic)>2 : 
             self.doubleclic=[]
+        self.end()
+        
+    def end(self):
+        if not "roi1" in position.values():
+            self.couleur_blanche=9
+        if not "roi2" in position.values():
+            self.couleur_blanche=3
     
 App(damier, doubleclic)
