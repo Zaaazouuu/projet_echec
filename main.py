@@ -16,7 +16,8 @@ def color(piece):
         return 3
     if piece[-1]=="2":
         return 9
-print(position)
+    
+doubleclic=[]
 
 class App:
     def __init__(self,start):
@@ -34,6 +35,7 @@ class App:
         pyxel.cls(0)
         self.draw_maze()
         self.draw_piece()
+        self.detection()
     
     def draw_maze(self):
         for x,y in self.start :
@@ -49,6 +51,22 @@ class App:
                     coloration=color(piece)
                     name=piece[0:len(piece)-1]
                     for i,j in image_piece[name]:
-                        pyxel.pset(side_length*x+i,y*side_length+j,coloration)       
+                        pyxel.pset(side_length*x+i,y*side_length+j,coloration)   
+    def detection(self):
+        if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) : 
+            x = pyxel.mouse_x//16
+            y = pyxel.mouse_y//16
+            doubleclic.append((x,y))
+    
+    def maj(self):
+        return True
+
+    
 App(damier)
 
+
+
+
+#if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
+#       clic_x = pyxel.mouse_x
+#        clic_y = pyxel.mouse_y
