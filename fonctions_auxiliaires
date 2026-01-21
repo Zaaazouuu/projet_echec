@@ -11,6 +11,43 @@ def non_tir_ami(pos_arrivee, pos_depart, position):
             return False
     return True
 
+def chemin_libre(pos_depart, pos_arrivee, position):
+    """
+    Vérifie qu'il n'y a aucune pièce entre le départ et l'arrivée.
+    Ne vérifie pas la case d'arrivée 
+    """
+    x1, y1 = pos_depart
+    x2, y2 = pos_arrivee
+    
+    dx = x2 - x1
+    dy = y2 - y1
+    if dx == 0:
+        pas_x = 0
+    elif dx > 0:
+        pas_x = 1
+    else:
+        pas_x = -1
+    if dy == 0:
+        pas_y = 0
+    elif dy > 0:
+        pas_y = 1
+    else:
+        pas_y = -1
+
+    x_courant = x1 + pas_x
+    y_courant = y1 + pas_y
+    while (x_courant, y_courant) != (x2, y2):
+        
+        if (x_courant, y_courant) in position:
+            return False          
+        x_courant += pas_x
+        y_courant += pas_y
+    return True
+
+
+
+
+
 def dans_le_damier(position_finale):
     if position_finale[0]<16 and position_finale[0]>=0 and position_finale[1]<16 and position_finale[1]>=0 : 
         return True

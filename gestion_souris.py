@@ -1,8 +1,7 @@
-#fonction qui a partir d'un premier clic valide (voir dictionnaire) va verfier si le deuxieme clic est un coup valide
 import fonctions_auxiliaires as fa
 
 
-def gestion_souris(position,clic1,clic2):
+def gestion_commande(position,clic1,clic2):
     pos_depart=clic1
     pos_arrivee=clic2
     piece=position[pos_depart]
@@ -11,10 +10,10 @@ def gestion_souris(position,clic1,clic2):
     position_finale=fa.position_finale(vecteur_deplacement,pos_depart)
     
     if not fa.dans_le_damier(position_finale):
-        return False
+        return None
 
     if not fa.non_tir_ami (pos_arrivee,pos_depart,position):
-        return False
+        return None
 
     nom_piece=piece[0:len(piece)-1]
     
@@ -23,21 +22,36 @@ def gestion_souris(position,clic1,clic2):
             ((joueur=="1" and pos_depart[1]==1) or (joueur=="2" and pos_depart[1]==6))) or fa.mvt_pion(vecteur_deplacement,joueur):
             return True
         else:
-            return False
+            return None
 
     if nom_piece=="cheval":
-        return fa.mvt_cheval(vecteur_deplacement)
+        if fa.mvt_cheval(vecteur_deplacement): 
+            position[pos_arrivee]=piece
+            position[pos_depart]=None
 
-    if nom_piece=="tour":
-        return fa.mvt_tour(vecteur_deplacement)
+    if nom_piece == "tour":
+        if fa.mvt_tour(vecteur_deplacement):
+            if fa.chemin_libre(pos_depart, pos_arrivee, position):
+                position[pos_arrivee]=piece
+                position[pos_depart]=None
+        
 
     if nom_piece=="fou":
-        return fa.mvt_fou(vecteur_deplacement)
+        if fa.mvt_fou(vecteur_deplacement):
+            if fa.chemin_libre(pos_depart, pos_arrivee, position):
+                position[pos_arrivee]=piece
+                position[pos_depart]=None
 
     if nom_piece=="roi":
-        return fa.mvt_roi(vecteur_deplacement)
-
+        if fa.mvt_roi(vecteur_deplacement):
+            if fa.chemin_libre(pos_depart, pos_arrivee, position):
+                position[pos_arrivee]=piece
+                position[pos_depart]=None
+        
     if nom_piece=="dame":
-        return fa.mvt_reine(vecteur_deplacement)    
+        if fa.mvt_reine(vecteur_deplacement):
+            if fa.chemin_libre(pos_depart, pos_arrivee, position):
+                position[pos_arrivee]=piece
+                position[pos_depart]=None
     
     return False
