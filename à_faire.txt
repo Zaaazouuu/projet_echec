@@ -1,9 +1,9 @@
 Choses à faire : 
 OK affichage du curseur 
-- rafraichissement de la page
-- déplacement des pièces avec le curseur (entrée sous forme de vecteur déplacement)
+OK rafraichissement de la page
+OK déplacement des pièces avec le curseur (entrée sous forme de vecteur déplacement)
 OK coder règles de déplacement des pièces
-- gestion des erreurs
+OK gestion des erreurs
 OK interdire de sortir du damier
 OK premièr déplacement des pions : 2 sauts autorisés
 OK ne pas manger ses propres pions (identification par numéro)

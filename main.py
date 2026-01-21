@@ -1,6 +1,7 @@
 import pyxel
 from position_data import initialisation_position
 from images_pièces import image_piece
+from gestion_souris import gestion_commande
 side_length = 16
 case_per_line = 8
 
@@ -16,6 +17,9 @@ def color(piece):
         return 3
     if piece[-1]=="2":
         return 9
+
+doubleclic=[]
+
 
 class App:
     def __init__(self,start):
@@ -33,6 +37,7 @@ class App:
         pyxel.cls(0)
         self.draw_maze()
         self.draw_piece()
+        self.detection()
     
     def draw_maze(self):
         for x,y in self.start :
@@ -48,5 +53,18 @@ class App:
                     coloration=color(piece)
                     name=piece[0:len(piece)-1]
                     for i,j in image_piece[name]:
-                        pyxel.pset(side_length*x+i,y*side_length+j,coloration)       
+                        pyxel.pset(side_length*x+i,y*side_length+j,coloration)   
+    def detection(self):
+        if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) : 
+            x = pyxel.mouse_x//16
+            y = pyxel.mouse_y//16
+            doubleclic.append((x,y))
+    
+    def maj(self):
+        if len(doubleclic)==2 : 
+            gestion_commande(doubleclic[0],doubleclic[1],position)
+            doubleclic=[]
+        if len(doubleclic)>2 : 
+            doubleclic=[]
+    
 App(damier)
