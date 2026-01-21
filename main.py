@@ -16,7 +16,6 @@ def color(piece):
         return 3
     if piece[-1]=="2":
         return 9
-print(position)
 
 class App:
     def __init__(self,start):
@@ -51,4 +50,3 @@ class App:
                     for i,j in image_piece[name]:
                         pyxel.pset(side_length*x+i,y*side_length+j,coloration)       
 App(damier)
-
