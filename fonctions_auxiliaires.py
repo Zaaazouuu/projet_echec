@@ -63,10 +63,10 @@ def mvt_initial_pion(vecteur_deplacement,joueur):
 
 def mvt_pion(vecteur_deplacement,joueur):
     if joueur == "1":
-        if vecteur_deplacement in [(0,1)] : 
+        if vecteur_deplacement in [(0,1),(1,1),(-1,1)] : 
             return True
     if joueur == "2":
-        if vecteur_deplacement in [(0,-1)] : 
+        if vecteur_deplacement in [(0,-1),(-1,-1),(1,-1)] : 
             return True
     return False
 
@@ -79,13 +79,13 @@ def mvt_cheval(vecteur_deplacement):
 
 
 def mvt_tour(vecteur_deplacement):
-    if vecteur_deplacement in [(0, n) for n in range(-7,8) if n!=0] + [(n,0) for n in range(-7,8) if n!=0]:
+    if vecteur_deplacement in ([(0, n) for n in range(-7,8)] + [(n,0) for n in range(-7,8)]):
         return True
     return False
 
 
 def mvt_fou(vecteur_deplacement):
-    if vecteur_deplacement in [(n, n) for n in range(-7,8) if n!=0] + [(n, -n) for n in range(-7,8) if n!=0]:
+    if vecteur_deplacement in ([(n, n) for n in range(-7,8)] + [(n, -n) for n in range(-7,8)]):
         return True
     return False    
 
@@ -107,6 +107,8 @@ def gestion_commande(position,clic1,clic2):
     pos_depart=clic1
     pos_arrivee=clic2
     piece=position[pos_depart]
+    if pos_depart==None : 
+        return position
     joueur=piece[-1]
     vecteur_deplacement=(pos_arrivee[0]-pos_depart[0],pos_arrivee[1]-pos_depart[1])
     position_finale=pos_arrivee
@@ -121,11 +123,13 @@ def gestion_commande(position,clic1,clic2):
     
     if nom_piece=="pion":
         if (mvt_initial_pion(vecteur_deplacement,joueur) and 
-            ((joueur=="1" and pos_depart[1]==1) or (joueur=="2" and pos_depart[1]==6))) or mvt_pion(vecteur_deplacement,joueur):
-            if position[pos_arrivee]==None :
+            ((joueur=="1" and pos_depart[1]==1) or (joueur=="2" and pos_depart[1]==6))) or mvt_pion(vecteur_deplacement,joueur) :
+            cle=False
+            if position[pos_arrivee]==None and vecteur_deplacement in [(0,1),(0,2),(1,0),(2,0),(0,-1),(0,-2),(-1,0),(-2,0)] :
                 position[pos_arrivee]=piece
                 position[pos_depart]=None
-            if vecteur_deplacement in [(1,1),(-1,-1),(1,-1),(-1,1)] :
+                cle=True
+            if position[pos_arrivee]!=None and cle==False and vecteur_deplacement in [(1,1),(-1,-1),(1,-1),(-1,1)]:
                 position[pos_arrivee]=piece
                 position[pos_depart]=None
 
