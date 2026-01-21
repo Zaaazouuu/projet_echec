@@ -71,6 +71,7 @@ def mvt_pion(vecteur_deplacement,joueur):
     return False
 
 def mvt_cheval(vecteur_deplacement):
+    print(vecteur_deplacement)
     if vecteur_deplacement in [(2, 1), (2, -1), (-2, 1), (-2, -1),
                              (1, 2), (1, -2), (-1, 2), (-1, -2)]:
         return True
@@ -121,10 +122,14 @@ def gestion_commande(position,clic1,clic2):
     if nom_piece=="pion":
         if (mvt_initial_pion(vecteur_deplacement,joueur) and 
             ((joueur=="1" and pos_depart[1]==1) or (joueur=="2" and pos_depart[1]==6))) or mvt_pion(vecteur_deplacement,joueur):
-            position[pos_arrivee]=piece
-            position[pos_depart]=None
+            if position[pos_arrivee]==None :
+                position[pos_arrivee]=piece
+                position[pos_depart]=None
+            if vecteur_deplacement in [(1,1),(-1,-1),(1,-1),(-1,1)] :
+                position[pos_arrivee]=piece
+                position[pos_depart]=None
 
-    if nom_piece=="cheval":
+    if nom_piece=="cavalier":
         if mvt_cheval(vecteur_deplacement): 
             position[pos_arrivee]=piece
             position[pos_depart]=None
