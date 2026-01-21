@@ -38,7 +38,7 @@ def chemin_libre(pos_depart, pos_arrivee, position):
     y_courant = y1 + pas_y
     while (x_courant, y_courant) != (x2, y2):
         
-        if (x_courant, y_courant) in position:
+        if position[(x_courant, y_courant)]!=None:
             return False          
         x_courant += pas_x
         y_courant += pas_y
@@ -79,7 +79,9 @@ def mvt_cheval(vecteur_deplacement):
 
 
 def mvt_tour(vecteur_deplacement):
-    if vecteur_deplacement in ([(0, n) for n in range(-7,8)] + [(n,0) for n in range(-7,8)]):
+   
+    m=[(0, -7), (0, -6), (0, -5), (0, -4), (0, -3), (0, -2), (0, -1), (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (-7, 0), (-6, 0), (-5, 0), (-4, 0), (-3, 0), (-2, 0), (-1, 0), (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0)]
+    if vecteur_deplacement in (m):
         return True
     return False
 
@@ -126,43 +128,44 @@ def gestion_commande(position,clic1,clic2):
             ((joueur=="1" and pos_depart[1]==1) or (joueur=="2" and pos_depart[1]==6))) or mvt_pion(vecteur_deplacement,joueur) :
             cle=False
             if position[pos_arrivee]==None and vecteur_deplacement in [(0,1),(0,2),(1,0),(2,0),(0,-1),(0,-2),(-1,0),(-2,0)] :
-                position[pos_arrivee]=piece
                 position[pos_depart]=None
+                position[pos_arrivee]=piece
                 cle=True
             if position[pos_arrivee]!=None and cle==False and vecteur_deplacement in [(1,1),(-1,-1),(1,-1),(-1,1)]:
-                position[pos_arrivee]=piece
                 position[pos_depart]=None
+                position[pos_arrivee]=piece
+                
 
     if nom_piece=="cavalier":
         if mvt_cheval(vecteur_deplacement): 
-            position[pos_arrivee]=piece
             position[pos_depart]=None
+            position[pos_arrivee]=piece
 
 
     if nom_piece == "tour":
         if mvt_tour(vecteur_deplacement):
             if chemin_libre(pos_depart, pos_arrivee, position):
-                position[pos_arrivee]=piece
                 position[pos_depart]=None
+                position[pos_arrivee]=piece
         
 
     if nom_piece=="fou":
         if mvt_fou(vecteur_deplacement):
             if chemin_libre(pos_depart, pos_arrivee, position):
-                position[pos_arrivee]=piece
                 position[pos_depart]=None
+                position[pos_arrivee]=piece
 
     if nom_piece=="roi":
         if mvt_roi(vecteur_deplacement):
             if chemin_libre(pos_depart, pos_arrivee, position):
-                position[pos_arrivee]=piece
                 position[pos_depart]=None
+                position[pos_arrivee]=piece
         
     if nom_piece=="dame":
         if mvt_reine(vecteur_deplacement):
             if chemin_libre(pos_depart, pos_arrivee, position):
-                position[pos_arrivee]=piece
                 position[pos_depart]=None
+                position[pos_arrivee]=piece
     
     return position
 
