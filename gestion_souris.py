@@ -2,7 +2,7 @@
 import fonctions_auxiliaires as fa
 
 
-def gestion_souris(position,clic1,clic2):
+def gestion_commande(position,clic1,clic2):
     pos_depart=clic1
     pos_arrivee=clic2
     piece=position[pos_depart]
