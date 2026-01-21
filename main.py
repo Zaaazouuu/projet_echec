@@ -25,6 +25,7 @@ class App:
         self.start=start
         self.couleur_blanche=7
         self.doubleclic=doubleclic
+        self.tour=True
         pyxel.init(side_length*case_per_line,side_length*case_per_line, title="Jeu d'échec")
         pyxel.mouse(True)
         pyxel.run(self.update, self.draw)
@@ -60,15 +61,12 @@ class App:
             x = pyxel.mouse_x//16
             y = pyxel.mouse_y//16
             self.doubleclic.append((x,y))
-            print(self.doubleclic)
             self.maj()
     
     def maj(self):
-        if len(self.doubleclic)==2 : 
-            print(doubleclic)
+        if len(self.doubleclic)==2 and self.doubleclic[1]!=self.doubleclic[0]:
             gestion_commande(position,self.doubleclic[0],self.doubleclic[1])
-            self.doubleclic=[]
-        if len(self.doubleclic)>2 : 
+        if len(self.doubleclic)>=2: 
             self.doubleclic=[]
         self.end()
         

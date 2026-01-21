@@ -1,7 +1,4 @@
 
-
-
-
 import random as rd
 
 def joueur_aleatoire(position):
