@@ -17,7 +17,7 @@ def case_en_danger(position):
             for i in range(8):
                 for j in range(8):
                    copie_position = position.copy()
-                   nouvelle_position = gestion_commande(copie_position, case, (i, j))
+                   nouvelle_position = gestion_commande(copie_position, case, (i, j))[1]
                    if nouvelle_position != position:
                         cases_menacees_1.add((i, j))
         else : 
@@ -29,7 +29,7 @@ def case_en_danger(position):
             for i in range(8):
                 for j in range(8):
                     copie_position = position.copy()
-                    nouvelle_position = gestion_commande(copie_position, case, (i, j))
+                    nouvelle_position = gestion_commande(copie_position, case, (i, j))[1]
                     if nouvelle_position != position:
                         cases_menacees_2.add((i, j))
         else :
