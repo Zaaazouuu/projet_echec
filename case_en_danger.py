@@ -1,6 +1,6 @@
 from fonctions_auxiliaires import gestion_commande
 
-def detection_echec_et_math(position):
+def cases_en_danger(position):
     pieces_j1 = []
     pieces_j2 = []
     position_roi1=None
