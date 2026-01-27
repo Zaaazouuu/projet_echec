@@ -2,7 +2,7 @@ import pyxel
 from position_data import initialisation_position
 from images_pièces import image_piece
 from fonctions_auxiliaires import gestion_commande
-from case_en_danger import detection_echec, detection_echec_et_math
+from case_en_danger import detection_echec_et_math
 side_length = 16
 case_per_line = 8
 
