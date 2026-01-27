@@ -20,7 +20,7 @@ def detection_echec(position):
     cases_menacees_2 = set()
 
     for case, piece in pieces_j1:
-        if piece is not "pion1":
+        if piece !="pion1":
             for i in range(8):
                 for j in range(8):
                    copie_position = position.copy()
@@ -32,7 +32,7 @@ def detection_echec(position):
             cases_menacees_1.add((case[0]+1,case[1]-1))
 
     for case, piece in pieces_j2:
-        if piece is not "pion2":
+        if piece !="pion2":
             for i in range(8):
                 for j in range(8):
                     copie_position = position.copy()
@@ -43,9 +43,13 @@ def detection_echec(position):
             cases_menacees_2.add((case[0]-1,case[1]+1))
             cases_menacees_2.add((case[0]+1,case[1]+1))
     if position_roi1 in cases_menacees_2  :
-        return "roi2"
+        return "roi1"
     if position_roi2 in cases_menacees_1 : 
-        return "roi1" 
+        return "roi2"
     return None 
-        
+
+def detection_echec_et_math(position):
+    "renvoie 'roi1' ou 'roi2' si il est en échec et math, et renvoie 'None' si pas d'echec et math"
+    return detection_echec(position) #temporairement
+         
 

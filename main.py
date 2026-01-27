@@ -2,7 +2,7 @@ import pyxel
 from position_data import initialisation_position
 from images_pièces import image_piece
 from fonctions_auxiliaires import gestion_commande
-from case_en_danger import detection_echec
+from case_en_danger import detection_echec, detection_echec_et_math
 side_length = 16
 case_per_line = 8
 
@@ -73,10 +73,10 @@ class App:
         self.end()
         
     def end(self):
-        etat=detection_echec(self.position)
+        etat=detection_echec_et_math(self.position)
         if etat=="roi1" or not "roi1" in self.position.values() : 
             self.couleur_blanche=9
         if etat=="roi2" or not "roi2" in self.position.values() :
-            self.couleur_blanche=7
+            self.couleur_blanche=3
     
 App(damier, position)
