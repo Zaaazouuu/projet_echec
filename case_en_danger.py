@@ -68,10 +68,10 @@ def initialisation_position():
         for i in range (0,case_per_line): 
             positions_initiale[(i,j)]=None
     for i in range (0,case_per_line): 
-        positions_initiale[(i,1)]="pion1"
+        positions_initiale[(i,1)]="tour1"
         positions_initiale[(i,0)]=pions_spéciaux_joueur1[i]
-        positions_initiale[(i,case_per_line-2)]="pion2"
+        positions_initiale[(i,case_per_line-2)]="tour2"
         positions_initiale[(i,case_per_line-1)]=pions_spéciaux_joueur2[i]
     return positions_initiale
 
-detection_echec(initialisation_position())
+cases_en_danger(initialisation_position())
