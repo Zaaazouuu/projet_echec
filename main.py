@@ -2,7 +2,7 @@ import pyxel
 from position_data import initialisation_position
 from images_pièces import image_piece
 from fonctions_auxiliaires import gestion_commande
-from case_en_danger import detection_echec, detection_echec_et_math
+from case_en_danger import detection_echec, detection_echec_et_mat
 side_length = 16
 case_per_line = 8
 
@@ -23,7 +23,7 @@ def color(piece):
     if piece[0]=="1" :
         return 15
     
-    
+
 class App:
     def __init__(self,start,position):
         self.start=start
@@ -69,12 +69,26 @@ class App:
                     name=piece[0:len(piece)-1]
                     for i,j in image_piece[name]:
                         pyxel.pset(side_length*x+i,y*side_length+j,coloration)
+        self.coloration_case_touchee()
     def detection(self):
         if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) : 
             x = pyxel.mouse_x//16
             y = pyxel.mouse_y//16
             self.doubleclic.append((x,y))
             self.maj()
+
+    def coloration_case_touchee(self):
+        if self.tour_joueur=="1" :
+            color = 3
+        else :
+            color=9
+
+        for (x,y) in self.doubleclic : 
+            for i in range(0,side_length):
+                for j in range (0,side_length):
+                    if i==0 or i==15 or j==0 or j==15 : 
+                        pyxel.pset(side_length*x+i,y*side_length+j,color)
+
     
     def maj(self):
         if len(self.doubleclic)==2 and self.doubleclic[1]!=self.doubleclic[0]:
@@ -85,7 +99,7 @@ class App:
         self.end()
         
     def end(self):
-        etat=detection_echec_et_math(self.position) #récupere le roi en echec, ou None. 
+        etat=detection_echec_et_mat(self.position) #récupere le roi en echec, ou None. 
         if etat=="roi1" or not "roi1" in self.position.values() : #si le roi1 est "mangé" ou en echec et maths, les cases blanches se colorent en la couleur du joueur 2
             self.couleur_blanche=15
         if etat=="roi2" or not "roi2" in self.position.values() : #si le roi2 est "mangé" ou en echec et maths, les cases blanches se colorent en la couleur du joueur 1

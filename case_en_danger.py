@@ -53,6 +53,6 @@ def detection_echec(position):
         echec.append(position_roi2)
     return echec
 
-def detection_echec_et_math(position):
+def detection_echec_et_mat(position):
     "renvoie 'roi1' ou 'roi2' si il est en échec et math, et renvoie 'None' si pas d'echec et math"
     return None
