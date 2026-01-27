@@ -24,7 +24,7 @@ class App:
         self.start=start
         self.couleur_blanche=7
         self.doubleclic=[]
-        self.tour_joueur="1"
+        self.tour_joueur="2"
         self.position=position
         pyxel.init(side_length*case_per_line,side_length*case_per_line, title="Jeu d'échec")
         pyxel.mouse(True)
