@@ -6,7 +6,7 @@ def cases_en_danger(position):
     position_roi1=None
     position_roi2=None
     for case, piece in position.items():
-        if piece is not None:
+        if piece !=None:
             if piece[-1] == "1":
                 pieces_j1.append((case, piece))
                 if piece =="roi1" :
@@ -46,7 +46,7 @@ def cases_en_danger(position):
         return "roi1"
     if position_roi2 in cases_menacees_1 : 
         return "roi2"
-    return None 
+    return None
 
 def detection_echec(position):
     return []
