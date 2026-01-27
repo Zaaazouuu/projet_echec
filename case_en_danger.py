@@ -24,7 +24,7 @@ def detection_echec(position):
             for i in range(8):
                 for j in range(8):
                    copie_position = position.copy()
-                   nouvelle_position = gestion_commande(copie_position, case, (i, j),1)[1]
+                   nouvelle_position = gestion_commande(copie_position, case, (i, j),"1")[1]
                    if nouvelle_position != position:
                         cases_menacees_1.add((i, j))
         else : 
@@ -36,7 +36,7 @@ def detection_echec(position):
             for i in range(8):
                 for j in range(8):
                     copie_position = position.copy()
-                    nouvelle_position = gestion_commande(copie_position, case, (i, j),2)[1]
+                    nouvelle_position = gestion_commande(copie_position, case, (i, j),"2")[1]
                     if nouvelle_position != position:
                         cases_menacees_2.add((i, j))
         else :

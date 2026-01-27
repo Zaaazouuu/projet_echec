@@ -18,6 +18,12 @@ def color(piece):
         return 3
     if piece[-1]=="2":
         return 9
+    if piece[0]=="2":
+        return 11
+    if piece[0]=="1" :
+        return 15
+
+
 
 
 class App:
@@ -27,6 +33,7 @@ class App:
         self.doubleclic=[]
         self.tour_joueur="2"
         self.position=position
+        self.echec=[] #((coordonnées du roi en echec) 
         pyxel.init(side_length*case_per_line,side_length*case_per_line, title="Jeu d'échec")
         pyxel.mouse(True)
         pyxel.run(self.update, self.draw)
@@ -43,10 +50,17 @@ class App:
         self.detection()
     
     def draw_maze(self):
-        for x,y in self.start :
-            for i in range (0,side_length) :
-                for j in range (0,side_length):
-                    pyxel.pset(side_length*x+i,y*side_length+j,self.couleur_blanche)
+        for x in range (0, case_per_line):
+            for y in range (0,case_per_line): 
+                coloration=0
+                if x%2==y%2 : 
+                    coloration=self.couleur_blanche
+                if (x,y) in self.echec : 
+                        piece=position[(x,y)]
+                        coloration=color(piece[-1]+piece[0:len(piece)-1])
+                for i in range (0,side_length) :
+                    for j in range (0,side_length):
+                        pyxel.pset(side_length*x+i,y*side_length+j,coloration)
             
     def draw_piece(self):
         for x in range (0,case_per_line):
@@ -56,7 +70,7 @@ class App:
                     coloration=color(piece)
                     name=piece[0:len(piece)-1]
                     for i,j in image_piece[name]:
-                        pyxel.pset(side_length*x+i,y*side_length+j,coloration)   
+                        pyxel.pset(side_length*x+i,y*side_length+j,coloration)
     def detection(self):
         if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) : 
             x = pyxel.mouse_x//16
@@ -67,7 +81,6 @@ class App:
     def maj(self):
         if len(self.doubleclic)==2 and self.doubleclic[1]!=self.doubleclic[0]:
             self.tour_joueur, self.position= gestion_commande(self.position,self.doubleclic[0],self.doubleclic[1], self.tour_joueur)
-            
         if len(self.doubleclic)>=2: 
             self.doubleclic=[]
         self.end()
@@ -75,8 +88,8 @@ class App:
     def end(self):
         etat=detection_echec_et_math(self.position)
         if etat=="roi1" or not "roi1" in self.position.values() : 
-            self.couleur_blanche=9
+            self.couleur_blanche=15
         if etat=="roi2" or not "roi2" in self.position.values() :
-            self.couleur_blanche=3
+            self.couleur_blanche=11
     
 App(damier, position)
