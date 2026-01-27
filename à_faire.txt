@@ -11,6 +11,6 @@ variable tour à tour
 coder un adversaire (aleatoire d'abord puis IA eventuellement)
 cas d'echec (variable en danger : stocker les cases en danger pour chaque joueur)
 cas d'echec et mat
-
+colorer la bordure de la case sur laquelle on a cliqué, et la case que l'on vise
 
 
