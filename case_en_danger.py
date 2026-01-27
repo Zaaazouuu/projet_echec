@@ -1,6 +1,6 @@
 from fonctions_auxiliaires import gestion_commande
 
-def detection_echec(position):
+def cases_en_danger(position):
     pieces_j1 = []
     pieces_j2 = []
     position_roi1=None
@@ -20,7 +20,7 @@ def detection_echec(position):
     cases_menacees_2 = set()
 
     for case, piece in pieces_j1:
-        if piece != "pion1":
+        if piece !="pion1":
             for i in range(8):
                 for j in range(8):
                    copie_position = position.copy()
@@ -32,7 +32,7 @@ def detection_echec(position):
             cases_menacees_1.add((case[0]+1,case[1]+1))
 
     for case, piece in pieces_j2:
-        if piece != "pion2":
+        if piece !="pion2":
             for i in range(8):
                 for j in range(8):
                     copie_position = position.copy()
@@ -46,8 +46,15 @@ def detection_echec(position):
         return "roi1"
     if position_roi2 in cases_menacees_1 : 
         return "roi2"
-    return None
-        
+    return None 
+
+def detection_echec(position):
+    return []
+
+def detection_echec_et_math(position):
+    "renvoie 'roi1' ou 'roi2' si il est en échec et math, et renvoie 'None' si pas d'echec et math"
+    return cases_en_danger(position) #temporairement
+         
 
 
 case_per_line=8
