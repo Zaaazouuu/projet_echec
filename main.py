@@ -22,10 +22,8 @@ def color(piece):
         return 11
     if piece[0]=="1" :
         return 15
-
-
-
-
+    
+    
 class App:
     def __init__(self,start,position):
         self.start=start

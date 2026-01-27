@@ -6,7 +6,7 @@ def detection_echec_et_math(position):
     position_roi1=None
     position_roi2=None
     for case, piece in position.items():
-        if piece is not None:
+        if piece !=None:
             if piece[-1] == "1":
                 pieces_j1.append((case, piece))
                 if piece =="roi1" :
@@ -42,10 +42,17 @@ def detection_echec_et_math(position):
         else :
             cases_menacees_2.add((case[0]-1,case[1]-1))
             cases_menacees_2.add((case[0]+1,case[1]-1))
-    if position_roi1 in cases_menacees_2  :
-        return "roi1"
-    if position_roi2 in cases_menacees_1 : 
-        return "roi2"
+    return cases_menacees_1,position_roi1, cases_menacees_2,position_roi2
+
+def detection_echec(position):
+    echec=[]
+    cases_menacees_1,position_roi1, cases_menacees_2,position_roi2=cases_en_danger(position)
+    if position_roi1 in cases_menacees_1 : 
+        echec.append(position_roi1)
+    if position_roi2 in cases_menacees_2 : 
+        echec.append(position_roi2)
+    return echec
+
+def detection_echec_et_math(position):
+    "renvoie 'roi1' ou 'roi2' si il est en échec et math, et renvoie 'None' si pas d'echec et math"
     return None
-
-
