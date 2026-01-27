@@ -74,7 +74,6 @@ def mvt_pion(vecteur_deplacement,joueur):
     return False
 
 def mvt_cheval(vecteur_deplacement):
-    print(vecteur_deplacement)
     if vecteur_deplacement in [(2, 1), (2, -1), (-2, 1), (-2, -1),
                              (1, 2), (1, -2), (-1, 2), (-1, -2)]:
         return True
