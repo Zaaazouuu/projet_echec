@@ -1,6 +1,6 @@
 from fonctions_auxiliaires import gestion_commande
 
-def detection_echec(position):
+def cases_en_danger(position):
     pieces_j1 = []
     pieces_j2 = []
     position_roi1=None
@@ -48,8 +48,11 @@ def detection_echec(position):
         return "roi2"
     return None 
 
+def detection_echec(position):
+    return []
+
 def detection_echec_et_math(position):
     "renvoie 'roi1' ou 'roi2' si il est en échec et math, et renvoie 'None' si pas d'echec et math"
-    return detection_echec(position) #temporairement
+    return cases_en_danger(position) #temporairement
          
 

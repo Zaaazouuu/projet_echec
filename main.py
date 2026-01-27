@@ -81,15 +81,16 @@ class App:
     def maj(self):
         if len(self.doubleclic)==2 and self.doubleclic[1]!=self.doubleclic[0]:
             self.tour_joueur, self.position= gestion_commande(self.position,self.doubleclic[0],self.doubleclic[1], self.tour_joueur)
+            self.echec = detection_echec(self.position)
         if len(self.doubleclic)>=2: 
             self.doubleclic=[]
         self.end()
         
     def end(self):
-        etat=detection_echec_et_math(self.position)
-        if etat=="roi1" or not "roi1" in self.position.values() : 
+        etat=detection_echec_et_math(self.position) #récupere le roi en echec, ou None. 
+        if etat=="roi1" or not "roi1" in self.position.values() : #si le roi1 est "mangé" ou en echec et maths, les cases blanches se colorent en la couleur du joueur 2
             self.couleur_blanche=15
-        if etat=="roi2" or not "roi2" in self.position.values() :
+        if etat=="roi2" or not "roi2" in self.position.values() : #si le roi2 est "mangé" ou en echec et maths, les cases blanches se colorent en la couleur du joueur 1
             self.couleur_blanche=11
     
 App(damier, position)
