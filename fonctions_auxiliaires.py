@@ -11,6 +11,12 @@ def non_tir_ami(pos_arrivee, pos_depart, position):
             return False
     return True
 
+def Changement_joueur(tour_joueur):
+    joueur_suivant="1"
+    if tour_joueur =="1" : 
+        joueur_suivant="2"
+    return joueur_suivant
+
 def chemin_libre(pos_depart, pos_arrivee, position):
     """
     Vérifie qu'il n'y a aucune pièce entre le départ et l'arrivée.
@@ -45,9 +51,6 @@ def chemin_libre(pos_depart, pos_arrivee, position):
     return True
 
 
-
-
-
 def dans_le_damier(position_finale):
     if position_finale[0]<16 and position_finale[0]>=0 and position_finale[1]<16 and position_finale[1]>=0 : 
         return True
@@ -77,12 +80,10 @@ def mvt_cheval(vecteur_deplacement):
         return True
     return False
 
-
 def mvt_tour(vecteur_deplacement):
     if vecteur_deplacement in ([(0, n) for n in range(-7,8)] + [(n, 0) for n in range(-7,8)]):
         return True
     return False
-
 
 def mvt_fou(vecteur_deplacement):
     if vecteur_deplacement in ([(n, n) for n in range(-7,8)] + [(n, -n) for n in range(-7,8)]):
@@ -96,28 +97,29 @@ def mvt_roi(vecteur_deplacement):
         return True
     return False
 
-
 def mvt_reine(vecteur_deplacement):
     if mvt_tour(vecteur_deplacement) or mvt_fou(vecteur_deplacement):
         return True
     return False
 
 
-def gestion_commande(position,clic1,clic2):
+def gestion_commande(position,clic1,clic2, tour_joueur):
     pos_depart=clic1
     pos_arrivee=clic2
     piece=position[pos_depart]
     if piece==None : 
-        return position
+        return tour_joueur,position
     joueur=piece[-1]
+    if joueur!=tour_joueur : 
+        return tour_joueur,position
     vecteur_deplacement=(pos_arrivee[0]-pos_depart[0],pos_arrivee[1]-pos_depart[1])
     position_finale=pos_arrivee
     
     if not dans_le_damier(position_finale):
-        return position
+        return tour_joueur,position
 
     if not non_tir_ami (pos_arrivee,pos_depart,position):
-        return position
+        return tour_joueur,position
 
     nom_piece=piece[0:len(piece)-1]
     
@@ -129,9 +131,11 @@ def gestion_commande(position,clic1,clic2):
                 position[pos_depart]=None
                 position[pos_arrivee]=piece
                 cle=True
+                tour_joueur=Changement_joueur(tour_joueur)
             if position[pos_arrivee]!=None and cle==False and vecteur_deplacement in [(1,1),(-1,-1),(1,-1),(-1,1)]:
                 position[pos_depart]=None
                 position[pos_arrivee]=piece
+                tour_joueur=Changement_joueur(tour_joueur)
             #si le pion arrive au camp opposé il devient une dame
             if pos_arrivee in [(i,0) for i in range (0,8)] and joueur=="2" : 
                 position[pos_arrivee]="dame2"
@@ -143,6 +147,7 @@ def gestion_commande(position,clic1,clic2):
         if mvt_cheval(vecteur_deplacement): 
             position[pos_depart]=None
             position[pos_arrivee]=piece
+            tour_joueur=Changement_joueur(tour_joueur)
 
 
     if nom_piece == "tour":
@@ -150,6 +155,7 @@ def gestion_commande(position,clic1,clic2):
             if chemin_libre(pos_depart, pos_arrivee, position):
                 position[pos_depart]=None
                 position[pos_arrivee]=piece
+                tour_joueur=Changement_joueur(tour_joueur)
         
 
     if nom_piece=="fou":
@@ -157,20 +163,22 @@ def gestion_commande(position,clic1,clic2):
             if chemin_libre(pos_depart, pos_arrivee, position):
                 position[pos_depart]=None
                 position[pos_arrivee]=piece
+                tour_joueur=Changement_joueur(tour_joueur)
 
     if nom_piece=="roi":
         if mvt_roi(vecteur_deplacement):
             if chemin_libre(pos_depart, pos_arrivee, position):
                 position[pos_depart]=None
                 position[pos_arrivee]=piece
+                tour_joueur=Changement_joueur(tour_joueur)
         
     if nom_piece=="dame":
         if mvt_reine(vecteur_deplacement):
             if chemin_libre(pos_depart, pos_arrivee, position):
                 position[pos_depart]=None
                 position[pos_arrivee]=piece
-    
-    return position
+                tour_joueur=Changement_joueur(tour_joueur)
+    return tour_joueur,position
 
 
         

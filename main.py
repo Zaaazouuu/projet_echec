@@ -18,14 +18,14 @@ def color(piece):
     if piece[-1]=="2":
         return 9
 
-doubleclic=[]
 
 class App:
-    def __init__(self,start,doubleclic):
+    def __init__(self,start,position):
         self.start=start
         self.couleur_blanche=7
-        self.doubleclic=doubleclic
-        self.tour=True
+        self.doubleclic=[]
+        self.tour_joueur="1"
+        self.position=position
         pyxel.init(side_length*case_per_line,side_length*case_per_line, title="Jeu d'échec")
         pyxel.mouse(True)
         pyxel.run(self.update, self.draw)
@@ -50,7 +50,7 @@ class App:
     def draw_piece(self):
         for x in range (0,case_per_line):
             for y in range (0,case_per_line):
-                piece=position[(x,y)]
+                piece=self.position[(x,y)]
                 if piece !=None :
                     coloration=color(piece)
                     name=piece[0:len(piece)-1]
@@ -65,15 +65,16 @@ class App:
     
     def maj(self):
         if len(self.doubleclic)==2 and self.doubleclic[1]!=self.doubleclic[0]:
-            gestion_commande(position,self.doubleclic[0],self.doubleclic[1])
+            self.tour_joueur, self.position= gestion_commande(self.position,self.doubleclic[0],self.doubleclic[1], self.tour_joueur)
+            
         if len(self.doubleclic)>=2: 
             self.doubleclic=[]
         self.end()
         
     def end(self):
-        if not "roi1" in position.values():
+        if not "roi1" in self.position.values():
             self.couleur_blanche=9
-        if not "roi2" in position.values():
+        if not "roi2" in self.position.values():
             self.couleur_blanche=3
     
-App(damier, doubleclic)
+App(damier, position)
